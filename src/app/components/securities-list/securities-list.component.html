@@ -1,5 +1,7 @@
-﻿<filterable-table
+﻿
+<filterable-table
   class="security-list"
+  (filter)="filterInterceptor($event)"
   [dataSource]="securities$ | async"
   [isLoading]="loadingSecurities$ | async">
 

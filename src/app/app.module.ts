@@ -8,6 +8,14 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from "@angular/material/table";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { SecuritiesListComponent } from './components/securities-list/securities-list.component';
+import { FilterTableModule } from './shared/filter-table/filter-table.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -16,13 +24,23 @@ import { SecuritiesListComponent } from './components/securities-list/securities
     SecuritiesListComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
     MatTableModule,
     MatProgressSpinnerModule,
+    FilterTableModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+  ]
 })
 export class AppModule { }

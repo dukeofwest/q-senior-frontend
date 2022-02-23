@@ -3,6 +3,7 @@ import { Security } from "../../models/security";
 import { BehaviorSubject, Observable } from "rxjs";
 import { indicate } from "../../utils";
 import { SecurityService } from "../../services/security.service";
+import { SecuritiesFilter } from 'src/app/models/securitiesFilter';
 
 @Component({
   selector: 'securities-list',
@@ -20,6 +21,10 @@ export class SecuritiesListComponent implements OnInit {
   ngOnInit(): void {
     this.securities$ = this.securityService.getSecurities({})
       .pipe(indicate(this.loadingSecurities$));
+  }
+
+  filterInterceptor(filter: SecuritiesFilter) {
+    this.securities$ = this.securityService.getSecurities(filter).pipe(indicate(this.loadingSecurities$));
   }
 
 }

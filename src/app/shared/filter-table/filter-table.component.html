@@ -1,0 +1,57 @@
+<form>
+    <mat-form-field *ngIf="displayName" class="chip-list">
+        <mat-label>Name:</mat-label>
+        <input matInput placeholder="Name" [formControl]="nameCtrl">
+    </mat-form-field>
+    <mat-form-field *ngIf="displayTypes" class="chip-list">
+        <label>Type:</label>
+        <mat-chip-list #typeList aria-label="filter selection">
+            <mat-chip color="primary" *ngFor="let type of selectedTypes" [selectable]="true" [removable]="true"
+                (removed)="removeType(type)">
+                {{type}}
+                <button matChipRemove *ngIf="true">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+            <input placeholder="Type" #typeInput [formControl]="typesCtrl" [matAutocomplete]="autoType"
+                [matChipInputFor]="typeList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="addType($event)">
+        </mat-chip-list>
+        <mat-autocomplete #autoType="matAutocomplete" (optionSelected)="selectType($event)">
+            <mat-option *ngFor="let type of filteredType | async" [value]="type">
+                {{type}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <!--end of type selector-->
+    <mat-form-field *ngIf="displayCurrencies" class="chip-list">
+        <mat-label>Currency:</mat-label>
+        <mat-chip-list #chipList aria-label="filter selection">
+            <mat-chip color="primary" *ngFor="let currency of selectedCurrencies" [selectable]="true" [removable]="true"
+                (removed)="removeCurr(currency)">
+                {{currency}}
+                <button matChipRemove *ngIf="true">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+            <input placeholder="Currency" #currencyInput [formControl]="currenciesCtrl" [matAutocomplete]="auto"
+                [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="addCurrency($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectCurrency($event)">
+            <mat-option *ngFor="let currency of filteredCurrency | async" [value]="currency">
+                {{currency}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <div *ngIf="displayPrivate">
+        <label for="isPrivate">isPrivate</label>
+        <input type="checkbox" name="isPrivate" [formControl]="isPrivateCtrl">
+    </div>
+
+    <div>
+        <button type="button" mat-raised-button color="primary" (click)="filter()">Filter</button>
+    </div>
+</form>
